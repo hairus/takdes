@@ -145,4 +145,11 @@ class HomeController extends Controller
 
         return back();
     }
+
+    public function delMapelKelas($id)
+    {
+        $del = mapel_kelas::find($id)->delete();
+
+        return back();
+    }
 }

@@ -33,7 +33,7 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ url('/login') }}">
                         @csrf
                         <h1>Login Form</h1>
                         <div>

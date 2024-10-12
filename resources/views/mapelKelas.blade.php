@@ -73,7 +73,7 @@
                                             <td>{{ $mapel->tas->semester }}</td>
                                             <td>{{ $mapel->tas->ta }}</td>
                                             <td>
-                                                <a href="">
+                                                <a href="{{ url('/delMapelKelas/'.$mapel->id)}}">
                                                     <button class="btn btn-sm btn-danger">Delete</button>
                                                 </a>
                                             </td>
