@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ekstraKulikuler;
 use App\Models\guru_ekstra;
+use App\Models\guru_kelas_tatib;
 use App\Models\guru_mapel_kelas;
+use App\Models\guru_tatib;
 use App\Models\kelas;
 use App\Models\mapel_kelas;
 use App\Models\mapels;
@@ -32,12 +34,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function index()
-     {
+    public function index()
+    {
         $gurus = User::where('role', 'guru')->get();
 
         return view('gurus', compact('gurus'));
-     }
+    }
 
     public function cetak()
     {
@@ -79,7 +81,7 @@ class HomeController extends Controller
         $jumKelas = count($request->kelas);
         $ta = tas::where('aktif', 1)->first();
 
-        for($x = 0; $x < $jumKelas; $x++) {
+        for ($x = 0; $x < $jumKelas; $x++) {
 
             $sim = guru_mapel_kelas::create([
                 "kelas_id" => $request->kelas[$x],
@@ -138,7 +140,7 @@ class HomeController extends Controller
         $ta = tas::where('aktif', 1)->first();
 
         $jumMapel = count($request->mapel);
-        for($x = 0; $x < $jumMapel; $x++) {
+        for ($x = 0; $x < $jumMapel; $x++) {
             $sim = mapel_kelas::create([
                 "mapel_id" => $request->mapel[$x],
                 "kelas_id" => $request->kelas,
@@ -227,6 +229,54 @@ class HomeController extends Controller
     public function delGuruEkstra($id)
     {
         $guruEkstras = guru_ekstra::find($id)->delete();
+
+        return back();
+    }
+
+    public function tatibs()
+    {
+        $gurus = User::where('role', 'guru')->get();
+        $kelas = kelas::all();
+        $guruTatibs = guru_tatib::get();
+        $gkts = guru_kelas_tatib::get();
+
+        return view('tatibs', compact('gurus', 'kelas', 'guruTatibs', 'gkts'));
+    }
+
+    public function simpanGuruTatib(Request $request)
+    {
+        guru_tatib::create([
+            "guru_id" => $request->guru_id,
+        ]);
+
+        return back();
+    }
+
+    public function deleteGuruTatib($id)
+    {
+        guru_tatib::find($id)->delete();
+
+        return back();
+    }
+
+    public function simGuruKelasTatib(Request $request)
+    {
+        $jum = count($request->kelas_id);
+        $ta = tas::where('aktif', 1)->first();
+        for ($x = 0; $x < $jum; $x++) {
+            $sim = guru_kelas_tatib::create([
+                "guru_id" => $request->guru_id,
+                "kelas_id" => $request->kelas_id[$x],
+                "ta_id" => $ta->id
+            ]);
+        }
+
+        return back();
+    }
+
+    public function delgkt($id)
+    {
+        $gtk = guru_kelas_tatib::find($id)->delete();
 
         return back();
     }

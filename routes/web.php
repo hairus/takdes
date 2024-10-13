@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\GuruTatibController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WaliController;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +38,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('delWali/{id}', [App\Http\Controllers\HomeController::class, 'delWali']);
 
     Route::get('ekstra', [App\Http\Controllers\HomeController::class, 'ekstra']);
-    ROute::post('simpanEkstra', [App\Http\Controllers\HomeController::class, 'simpanEkstra']);
-    ROute::post('simpanGuruEkstra', [App\Http\Controllers\HomeController::class, 'simpanGuruEkstra']);
-    ROute::get('delEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delEkstra']);
-    ROute::get('delGuruEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delGuruEkstra']);
+    Route::post('simpanEkstra', [App\Http\Controllers\HomeController::class, 'simpanEkstra']);
+    Route::post('simpanGuruEkstra', [App\Http\Controllers\HomeController::class, 'simpanGuruEkstra']);
+    Route::get('delEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delEkstra']);
+    Route::get('delGuruEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delGuruEkstra']);
+
+
+    Route::get('tatibs', [App\Http\Controllers\HomeController::class, 'tatibs']);
+    Route::post('simpanGuruTatib', [App\Http\Controllers\HomeController::class, 'simpanGuruTatib']);
+    Route::get('deleteGuruTatib/{id}', [App\Http\Controllers\HomeController::class, 'deleteGuruTatib']);
+    Route::post('simGuruKelasTatib', [App\Http\Controllers\HomeController::class, 'simGuruKelasTatib']);
+    Route::get('delgkt/{id}', [App\Http\Controllers\HomeController::class, 'delgkt']);
+
+
 });
 
 Route::group(['middleware' => ['auth', 'guru']], function () {
@@ -64,8 +74,6 @@ Route::group(['middleware' => ['auth', 'guru']], function () {
     Route::get('InputNilaiEkstra', [GuruController::class, 'InputNilaiEkstra']);
     Route::get('downloadEkstra', [GuruController::class, 'downloadEkstra']);
     Route::post('importNilaiEkstra', [GuruController::class, 'importNilaiEkstra']);
-
-
 });
 
 
@@ -73,5 +81,14 @@ Route::group(['middleware' => ['auth', 'guru', 'wali']], function () {
     Route::get('/wali', [WaliController::class, 'index']);
     Route::get('cetak/{id}', [WaliController::class, 'cetak']);
 });
+
+
+Route::group(['middleware' => ['auth', 'guru' ,'tatib']], function () {
+    Route::get('/inputPoin', [GuruTatibController::class, 'inputPoin']);
+    Route::post('/exportPoin', [GuruTatibController::class, 'exportPoin']);
+    Route::post('/importPoin', [GuruTatibController::class, 'importPoin']);
+    Route::get('delPoin/{id}', [GuruTatibController::class, 'delPoin']);
+});
+
 
 

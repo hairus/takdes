@@ -81,6 +81,7 @@
                                             <li><a href="{{ url('/mapelKelas') }}">Management Mapel Kelas</a></li>
                                             <li><a href="{{ url('/walis') }}">Management Wali</a></li>
                                             <li><a href="{{ url('/ekstra') }}">Management Ekstra</a></li>
+                                            <li><a href="{{ url('/tatibs') }}">Management tatib</a></li>
                                             <li><a href="{{ url('/cetak') }}">cetak</a></li>
                                         </ul>
                                     </li>
@@ -144,6 +145,16 @@
                                             <li><a href="{{ url('/penT') }}">Penialan Tugas</a></li>
                                             <li><a href="{{ url('/penUH') }}">Penilaian UH</a></li>
                                             <li><a href="{{ url('/kehadiran') }}">Input Kehadiran</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endif
+                            @if (auth()->user()->tatib)
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-check-circle-o"></i> Guru Tatib<span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ url('/inputPoin') }}">Input Poin</a></li>
                                         </ul>
                                     </li>
                                 </ul>

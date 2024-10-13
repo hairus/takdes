@@ -80,7 +80,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
         }
 
         table,
@@ -384,34 +384,17 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Jenis Pelanggaran Tata Tertib</th>
-                <th>Point</th>
-                <th>Banyak Pelanggaran</th>
-                <th>Jumlah Point</th>
+                <th>Total Poin Pelanggaran</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>1</td>
-                <td>Terlambat</td>
-                <td>10</td>
-                <td>2</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Tidak mengikuti pelajaran</td>
-                <td>20</td>
-                <td>1</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td colspan="4" style="text-align: right;"><strong>Total Jumlah Point Pelanggaran</strong></td>
-                <td><strong>40</strong></td>
+                <td>{{ $poin->poin }}</td>
             </tr>
         </tbody>
     </table>
-
+    <code style="margin: 0"><i>NB: Untuk Detail Pelanggaran Silakan Menghubungi BK / Tim Tatib Sekolah</i></code>
     <!-- D. Catatan/Tanggapan Orang Tua -->
     <div class="section-title">D. Catatan/Tanggapan Orang Tua</div>
     <div class="catatan-orangtua">

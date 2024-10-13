@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(guru_ekstra::class, 'guru_id');
     }
+
+    public function tatib()
+    {
+        return $this->hasOne(guru_tatib::class, 'guru_id');
+    }
 }

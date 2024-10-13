@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kelas;
 use App\Models\mapel_kelas;
+use App\Models\nilai_tatib;
 use App\Models\nilaiEsktras;
 use App\Models\siswa_ekstra;
 use App\Models\siswas;
@@ -54,7 +55,9 @@ class WaliController extends Controller
 
         $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
 
-        return view('cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras'));
+        $poin = nilai_tatib::where('siswa_id', $siswa->id)->first();
+
+        return view('cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin'));
     }
 
     /**
