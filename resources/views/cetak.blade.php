@@ -233,7 +233,7 @@
                 @endphp
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>
+                    <td style="text-align: left">
                         <b>{{ $value->mapels->mapel }}</b>
                         <p style="font-size: 14px">Jml Tugas :
                             <b>{{ $count1 + $count2 + $count3 + $count4 + $count5 }}</b> Jml UH :
