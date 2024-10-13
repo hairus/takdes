@@ -146,7 +146,7 @@
         </div>
         <hr style="border-top: 2px solid black;">
         <h3>LAPORAN PERKEMBANGAN BELAJAR PESERTA DIDIK TENGAH SEMESTER</h3>
-        <h3>TAHUN PELAJARAN 2023-2024</h3>
+        <h3>TAHUN PELAJARAN 2024-2025</h3>
     </div>
 
     <div class="student-info">
@@ -161,7 +161,7 @@
             </tr>
             <tr>
                 <td>Kelas/Semester</td>
-                <td>: {{ strtoupper($siswa->rombel) }}/{{ $ta->semester }}</td>
+                <td>: {{ strtoupper($siswa->rombel) }} / {{ $ta->semester }}</td>
             </tr>
         </table>
     </div>
@@ -417,8 +417,8 @@
             <p>Kraksaan, 26 Maret 2024</p>
             <p>Wali Kelas,</p>
             <br><br>
-            <p><strong>Novilia Gita Nuraini, S.Pd.</strong><br>
-                NIP. 19880120203212026</p>
+            <p><strong>{{ auth()->user()->name }}</strong><br>
+                NIP. {{ auth()->user()->nip }}</p>
         </div>
     </div>
 
