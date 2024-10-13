@@ -80,6 +80,7 @@
                                             <li><a href="{{ url('/mapels') }}">Management Mapel</a></li>
                                             <li><a href="{{ url('/mapelKelas') }}">Management Mapel Kelas</a></li>
                                             <li><a href="{{ url('/walis') }}">Management Wali</a></li>
+                                            <li><a href="{{ url('/cetak') }}">cetak</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
@@ -142,7 +143,6 @@
                                             <li><a href="{{ url('/penT') }}">Penialan Tugas</a></li>
                                             <li><a href="{{ url('/penUH') }}">Penilaian UH</a></li>
                                             <li><a href="{{ url('/kehadiran') }}">Input Kehadiran</a></li>
-                                            <li><a href="{{ url('/cetak') }}">cetak</a></li>
                                         </ul>
                                     </li>
                                 </ul>
