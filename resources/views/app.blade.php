@@ -80,6 +80,7 @@
                                             <li><a href="{{ url('/mapels') }}">Management Mapel</a></li>
                                             <li><a href="{{ url('/mapelKelas') }}">Management Mapel Kelas</a></li>
                                             <li><a href="{{ url('/walis') }}">Management Wali</a></li>
+                                            <li><a href="{{ url('/ekstra') }}">Management Ekstra</a></li>
                                             <li><a href="{{ url('/cetak') }}">cetak</a></li>
                                         </ul>
                                     </li>
@@ -147,14 +148,23 @@
                                     </li>
                                 </ul>
                             @endif
-
+                            @if (auth()->user()->ekstras)
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-plus-square"></i> Guru Ekstra<span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ url('/mappingSiswaEkstra') }}">Mapping Siswa</a></li>
+                                            <li><a href="{{ url('/InputNilaiEkstra') }}">Input Nilai</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endif
                             @if (auth()->user()->walis)
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-users"></i> Wali Kelas <span
                                                 class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{{ url('/input') }}">Input </a></li>
-                                            <li><a href="{{ url('/wali') }}">Cetak</a></li>
+                                            <li><a href="{{ url('/wali') }}">Cetak Laporan</a></li>
                                         </ul>
                                     </li>
                                 </ul>

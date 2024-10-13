@@ -35,6 +35,12 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/walis', [App\Http\Controllers\HomeController::class, 'wali']);
     Route::post('simpanWali', [App\Http\Controllers\HomeController::class, 'simpanWali']);
     Route::get('delWali/{id}', [App\Http\Controllers\HomeController::class, 'delWali']);
+
+    Route::get('ekstra', [App\Http\Controllers\HomeController::class, 'ekstra']);
+    ROute::post('simpanEkstra', [App\Http\Controllers\HomeController::class, 'simpanEkstra']);
+    ROute::post('simpanGuruEkstra', [App\Http\Controllers\HomeController::class, 'simpanGuruEkstra']);
+    ROute::get('delEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delEkstra']);
+    ROute::get('delGuruEkstra/{id}', [App\Http\Controllers\HomeController::class, 'delGuruEkstra']);
 });
 
 Route::group(['middleware' => ['auth', 'guru']], function () {
@@ -49,6 +55,16 @@ Route::group(['middleware' => ['auth', 'guru']], function () {
     Route::get('/kehadiran', [GuruController::class, 'kehadiran']);
     Route::post('/exportKehadiran', [GuruController::class, 'exportKehadiran']);
     Route::post('/importKehadiran', [GuruController::class, 'importKehadiran']);
+
+
+    Route::get('mappingSiswaEkstra', [GuruController::class, 'mappingSiswaEkstra']);
+    Route::post('simpanMapingSiswa', [GuruController::class, 'simpanMapingSiswa']);
+    Route::get('delSiswaEkstra/{id}', [GuruController::class, 'delSiswaEkstra']);
+    Route::get('InputNilaiEkstra', [GuruController::class, 'InputNilaiEkstra']);
+    Route::get('downloadEkstra', [GuruController::class, 'downloadEkstra']);
+    Route::post('importNilaiEkstra', [GuruController::class, 'importNilaiEkstra']);
+
+
 });
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ekstraKulikuler;
+use App\Models\guru_ekstra;
 use App\Models\guru_mapel_kelas;
 use App\Models\kelas;
 use App\Models\mapel_kelas;
@@ -179,6 +181,52 @@ class HomeController extends Controller
     public function delWali($id)
     {
         wali::find($id)->delete();
+
+        return back();
+    }
+
+    public function ekstra()
+    {
+        $ektras = ekstraKulikuler::all();
+
+        $gurus = User::whereDoesntHave('ekstras')->where('role', 'guru')->get();
+
+        $guruEkstras = guru_ekstra::with('gurus', 'ekstras')->get();
+
+        return view('ekstras', compact('ektras', 'gurus', 'guruEkstras'));
+    }
+
+    public function simpanEkstra(Request $request)
+    {
+        $sim = ekstraKulikuler::create([
+            "ekstra" => $request->ekstra
+        ]);
+
+        return back();
+    }
+
+    public function simpanGuruEkstra(Request $request)
+    {
+        $ta = tas::where('aktif', 1)->first();
+        $sim = guru_ekstra::create([
+            "guru_id" => $request->guru_id,
+            "ekstra_id" => $request->ekstra_id,
+            "ta_id" => $ta->id
+        ]);
+
+        return back();
+    }
+
+    public function delEkstra($id)
+    {
+        $ekstra = ekstraKulikuler::find($id)->delete();
+
+        return back();
+    }
+
+    public function delGuruEkstra($id)
+    {
+        $guruEkstras = guru_ekstra::find($id)->delete();
 
         return back();
     }

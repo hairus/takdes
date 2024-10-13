@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapor Siswa Kelas XI</title>
+    <title>Rapor Sisipan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -133,20 +133,30 @@
 <body>
 
     <div class="header">
-        <img src="logo-jatim.png" alt="Logo Provinsi Jawa Timur">
-        <h1>Pemerintah Provinsi Jawa Timur</h1>
-        <h2>Dinas Pendidikan</h2>
-        <h2>SMAN 1 Kraksaan</h2>
-        <div class="school-info">
-            <p>Jalan Imam Bonjol No. 13 Kraksaan Telp. (0335) 841214</p>
-            <p><span class="bold">Website :</span> <a href="http://sman1kraksaan.sch.id">http://sman1kraksaan.sch.id</a>
-                <span class="bold">Email :</span> sman1kraksaan@gmail.com
-            </p>
-            <p>Probolinggo 67282</p>
-        </div>
+        <table boder="none" style="border:none">
+            <tr>
+                <td style="border:none;"><img src="{{ asset('logo-jatim.png') }}" alt="Logo Provinsi Jawa Timur"></td>
+                <td style="border:none;">
+                    <h1>Pemerintah Provinsi Jawa Timur</h1>
+                    <h2>Dinas Pendidikan</h2>
+                    <h2>SMAN 1 Kraksaan</h2>
+                    <div class="school-info">
+                        <p>Jalan Imam Bonjol No. 13 Kraksaan Telp. (0335) 841214</p>
+                        <p><span class="bold">Website :</span> <a
+                                href="http://sman1kraksaan.sch.id">http://sman1kraksaan.sch.id</a>
+                            <span class="bold">Email :</span> sman1kraksaan@gmail.com
+                        </p>
+                        <p>Probolinggo 67282</p>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
         <hr style="border-top: 2px solid black;">
         <h3>LAPORAN PERKEMBANGAN BELAJAR PESERTA DIDIK TENGAH SEMESTER</h3>
         <h3>TAHUN PELAJARAN 2024-2025</h3>
+
     </div>
 
     <div class="student-info">
@@ -357,12 +367,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Paskibra</td>
-                <td>B</td>
-                <td>Baik dan aktif dalam mengikuti kegiatan ekstrakurikuler</td>
-            </tr>
+            @foreach ($ekstras as $key => $value)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $value->ekstras->ekstra }}</td>
+                    <td>{{ $value->predikat }}</td>
+                    <td>{{ $value->keterangan }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 

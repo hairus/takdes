@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ektraExport;
 use App\Exports\kehadiranExport;
 use App\Exports\TugasSiswaExport;
 use App\Exports\UhExport;
+use App\Imports\importEkstra;
 use App\Imports\kehadiranImport;
 use App\Imports\UhImport;
 use App\Imports\UsersImport;
 use App\Models\guru_mapel_kelas;
 use App\Models\kehadiran;
+use App\Models\nilaiEsktras;
 use App\Models\nilaiT;
 use App\Models\NilaiUh;
+use App\Models\siswa_ekstra;
+use App\Models\siswas;
 use App\Models\tas;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -168,6 +173,65 @@ class GuruController extends Controller
         $path = $request->file->move(public_path('excel'), $fileName);
 
         Excel::import(new kehadiranImport, $path);
+
+        return back();
+    }
+
+    public function mappingSiswaEkstra()
+    {
+        $siswas = siswas::orderBy('rombel')->orderBY('name')->get();
+        $siswa_ekstras = siswa_ekstra::where('guru_id', auth()->user()->id)->get();
+        $nilaisEkstras = nilaiEsktras::where('guru_id', auth()->user()->id)->get();
+
+        return view('ekstra.index', compact('siswas', 'siswa_ekstras', 'nilaisEkstras'));
+    }
+
+    public function simpanMapingSiswa(Request $request)
+    {
+        $jum = count($request->siswa_id);
+        $ta = tas::where('aktif', 1)->first();
+        for ($x = 0; $x < $jum; $x++) {
+            siswa_ekstra::create([
+                "siswa_id" => $request->siswa_id[$x],
+                "ekstra_id" => auth()->user()->ekstras->ekstra_id,
+                "ta_id" => $ta->id,
+                "guru_id" => auth()->user()->id
+            ]);
+        }
+        return back();
+    }
+
+    public function delSiswaEkstra($id)
+    {
+        siswa_ekstra::find($id)->delete();
+
+        return back();
+    }
+
+    public function InputNilaiEkstra()
+    {
+        $nilai = nilaiEsktras::where('guru_id', auth()->user()->id)->get();
+
+        return view('ekstra.nilai', compact('nilai'));
+    }
+
+    public function downloadEkstra()
+    {
+        return Excel::download(new ektraExport, 'ekstra.xlsx');
+    }
+
+    public function importNilaiEkstra(Request $request)
+    {
+        $request->validate([
+            "file" => "required|mimes:xlsx"
+        ]);
+        $file = $request->file('file');
+
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+
+        $path = $request->file->move(public_path('excel'), $fileName);
+
+        Excel::import(new importEkstra, $path);
 
         return back();
     }
