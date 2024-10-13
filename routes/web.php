@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'guru']], function () {
     Route::get('mappingSiswaEkstra', [GuruController::class, 'mappingSiswaEkstra']);
     Route::post('simpanMapingSiswa', [GuruController::class, 'simpanMapingSiswa']);
     Route::get('delSiswaEkstra/{id}', [GuruController::class, 'delSiswaEkstra']);
+    Route::get('delNilaiEkstra/{id}', [GuruController::class, 'delNilaiEkstra']);
     Route::get('InputNilaiEkstra', [GuruController::class, 'InputNilaiEkstra']);
     Route::get('downloadEkstra', [GuruController::class, 'downloadEkstra']);
     Route::post('importNilaiEkstra', [GuruController::class, 'importNilaiEkstra']);

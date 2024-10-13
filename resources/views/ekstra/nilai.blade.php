@@ -60,7 +60,7 @@
                                         <td>{{ $value->predikat }}</td>
                                         <td>{{ $value->keterangan }}</td>
                                         <td>
-                                            <a href="{{ url('/delSiswaEkstra/' . $value->id) }}">
+                                            <a href="{{ url('/delNilaiEkstra/' . $value->id) }}">
                                                 <button class="btn btn-danger btn-sm">Delete</button>
                                             </a>
                                         </td>

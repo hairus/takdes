@@ -215,6 +215,13 @@ class GuruController extends Controller
         return view('ekstra.nilai', compact('nilai'));
     }
 
+    public function delNilaiEkstra($id)
+    {
+        $del = nilaiEsktras::find($id)->delete();
+
+        return back();
+    }
+
     public function downloadEkstra()
     {
         return Excel::download(new ektraExport, 'ekstra.xlsx');
