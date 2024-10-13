@@ -9,6 +9,7 @@ use App\Models\mapels;
 use App\Models\siswas;
 use App\Models\tas;
 use App\Models\User;
+use App\Models\wali;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -149,6 +150,35 @@ class HomeController extends Controller
     public function delMapelKelas($id)
     {
         $del = mapel_kelas::find($id)->delete();
+
+        return back();
+    }
+
+    public function wali()
+    {
+        $gurus = User::whereDoesntHave('walis')->where('role', 'guru')->get();
+        $kelas = kelas::all();
+
+        $walis = wali::with('kelas', 'guru', 'tas')->get();
+
+        return view('wali', compact('gurus', 'kelas', 'walis'));
+    }
+
+    public function simpanWali(Request $request)
+    {
+        $ta = tas::where('aktif', 1)->first();
+        $sim = wali::create([
+            "guru_id" => $request->guru_id,
+            "kelas_id" => $request->kelas_id,
+            "ta_id" => $ta->id,
+        ]);
+
+        return back();
+    }
+
+    public function delWali($id)
+    {
+        wali::find($id)->delete();
 
         return back();
     }

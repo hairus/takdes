@@ -153,15 +153,15 @@
         <table>
             <tr>
                 <td>Nama Peserta Didik</td>
-                <td>: Zulmi Rizki Maulana</td>
+                <td>: {{ strtoupper($siswa->name) }}</td>
             </tr>
             <tr>
                 <td>Nomor Induk/NISN</td>
-                <td>: 0071652394 / 11559</td>
+                <td>: {{ strtoupper($siswa->nis) }} / {{ strtoupper($siswa->nisn) }}</td>
             </tr>
             <tr>
                 <td>Kelas/Semester</td>
-                <td>: XI TEKNIK 2 / Semester 2</td>
+                <td>: {{ strtoupper($siswa->rombel) }}/{{ $ta->semester }}</td>
             </tr>
         </table>
     </div>
@@ -195,45 +195,152 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>
-                    <b>P. A. Islam dan Budi Pekerti</b>
-                    <p style="font-size: 14px">Jml Tugas : <b>2</b> Jml UH : <b>2</b></p>
-                </td>
-                <td>80</td>
-                <td>85</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>80</td>
-                <td>85</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Pendidikan Pancasila</td>
-                <td>90</td>
-                <td>88</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>100</td>
-                <td>88</td>
-                <td>90</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
+            @foreach ($mapel_kelas as $key => $value)
+                @php
+
+                    $tugas1 = $value->mapels->tugass
+                        ->where('tugas1', '!=', 0)
+                        ->where('siswa_id', $siswa->id)
+                        ->first();
+                    $tugas2 = $value->mapels->tugass->where('tugas2', '!=', 0)->first();
+                    $tugas3 = $value->mapels->tugass->where('tugas3', '!=', 0)->first();
+                    $tugas4 = $value->mapels->tugass->where('tugas4', '!=', 0)->first();
+                    $tugas5 = $value->mapels->tugass->where('tugas5', '!=', 0)->first();
+
+                    $uh1 = $value->mapels->uhs->where('uh1', '!=', 0)->first();
+                    $uh2 = $value->mapels->uhs->where('uh2', '!=', 0)->first();
+                    $uh3 = $value->mapels->uhs->where('uh3', '!=', 0)->first();
+                    $uh4 = $value->mapels->uhs->where('uh4', '!=', 0)->first();
+                    $uh5 = $value->mapels->uhs->where('uh5', '!=', 0)->first();
+
+                    $absen = $value->mapels->kehadirans
+                        ->where('siswa_id', $siswa->id)
+                        ->where('mapel_id', $value->mapel_id)
+                        ->first();
+
+                    $count1 = $value->mapels->tugass->where('tugas1', '!=', 0)->count();
+                    $count2 = $value->mapels->tugass->where('tugas2', '!=', 0)->count();
+                    $count3 = $value->mapels->tugass->where('tugas3', '!=', 0)->count();
+                    $count4 = $value->mapels->tugass->where('tugas4', '!=', 0)->count();
+                    $count5 = $value->mapels->tugass->where('tugas5', '!=', 0)->count();
+
+                    $countU1 = $value->mapels->uhs->where('uh1', '!=', 0)->count();
+                    $countU2 = $value->mapels->uhs->where('uh2', '!=', 0)->count();
+                    $countU3 = $value->mapels->uhs->where('uh3', '!=', 0)->count();
+                    $countU4 = $value->mapels->uhs->where('uh4', '!=', 0)->count();
+                    $countU5 = $value->mapels->uhs->where('uh5', '!=', 0)->count();
+
+                @endphp
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>
+                        <b>{{ $value->mapels->mapel }}</b>
+                        <p style="font-size: 14px">Jml Tugas :
+                            <b>{{ $count1 + $count2 + $count3 + $count4 + $count5 }}</b> Jml UH :
+                            <b>{{ $countU1 + $countU2 + $countU3 + $countU4 + $countU5 }}</b>
+                        </p>
+                    </td>
+
+                    <td>
+                        @if ($tugas1)
+                            {{ $tugas1['tugas1'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($tugas2)
+                            {{ $tugas2['tugas2'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($tugas3)
+                            {{ $tugas3['tugas3'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($tugas4)
+                            {{ $tugas4['tugas4'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($tugas5)
+                            {{ $tugas5['tugas5'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($uh1)
+                            {{ $uh1['uh1'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($uh2)
+                            {{ $uh2['uh2'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($uh3)
+                            {{ $uh3['uh3'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($uh4)
+                            {{ $uh4['uh4'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($uh5)
+                            {{ $uh5['uh5'] }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($absen)
+                            {{ $absen->sakit }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($absen)
+                            {{ $absen->ijin }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($absen)
+                            {{ $absen->alpa }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($absen)
+                            {{ $absen->dispen }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
             <!-- Tambahkan mata pelajaran lainnya -->
         </tbody>
     </table>

@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function walis()
+    {
+        return $this->hasOne(wali::class, 'guru_id');
+    }
 }

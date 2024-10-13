@@ -79,6 +79,7 @@
                                             <li><a href="{{ url('/kelas') }}">Management kelas</a></li>
                                             <li><a href="{{ url('/mapels') }}">Management Mapel</a></li>
                                             <li><a href="{{ url('/mapelKelas') }}">Management Mapel Kelas</a></li>
+                                            <li><a href="{{ url('/walis') }}">Management Wali</a></li>
                                             <li><a href="{{ url('/cetak') }}">cetak</a></li>
                                         </ul>
                                     </li>
@@ -135,12 +136,26 @@
                             @if (auth()->user()->role == 'guru')
                                 <h3>Guru</h3>
                                 <ul class="nav side-menu">
-                                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-home"></i> Home <span
+                                                class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{ url('/profile') }}">Profile</a></li>
                                             <li><a href="{{ url('/penT') }}">Penialan Tugas</a></li>
                                             <li><a href="{{ url('/penUH') }}">Penilaian UH</a></li>
+                                            <li><a href="{{ url('/kehadiran') }}">Input Kehadiran</a></li>
                                             <li><a href="{{ url('/cetak') }}">cetak</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endif
+
+                            @if (auth()->user()->walis)
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-users"></i> Wali Kelas <span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ url('/input') }}">Input </a></li>
+                                            <li><a href="{{ url('/wali') }}">Cetak</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -185,12 +200,12 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    {{-- <a class="dropdown-item" href="javascript:;"> Profile</a>
                                     <a class="dropdown-item" href="javascript:;">
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
                                     </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                    <a class="dropdown-item" href="javascript:;">Help</a> --}}
                                     <a class="dropdown-item" href="{{ url('/logout') }}"><i
                                             class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>

@@ -4,12 +4,11 @@ namespace App\Exports;
 
 use App\Models\kelas;
 use App\Models\mapels;
-
 use App\Models\siswas;
-use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Illuminate\Contracts\View\View;
 
-class TugasSiswaExport implements FromView
+class kehadiranExport implements FromView
 {
 
     public function __construct(int $mapel_id, int $kelas_id)
@@ -24,7 +23,7 @@ class TugasSiswaExport implements FromView
         $mapel = mapels::where('id', $this->mapel_id)->first();
         $kelas = kelas::where('id', $this->kelas_id)->first();
 
-        return view('guru.exportT', [
+        return view('guru.exportKehadiran', [
             'siswas' => $siswa,
             "mapel"=> $mapel,
             "kelas" => $kelas

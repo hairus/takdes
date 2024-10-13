@@ -7,11 +7,11 @@
                 <div class="card">
                     <div class="card-title">
                         <div class="card-header">
-                            <h3>Penilaian Tugas</h3>
+                            <h3>Input Kehadiran</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('/exportT') }}" method="post">
+                        <form action="{{ url('/exportKehadiran') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="">Pilih Mapel</label>
@@ -41,11 +41,11 @@
                 <div class="card">
                     <div class="card-title">
                         <div class="card-header">
-                            <h3>Import Tugas</h3>
+                            <h3>Import Kehadiran</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('imporT') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('importKehadiran') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="">Import Tugas</label>
@@ -63,7 +63,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <h5>Show Nilai Tugas</h5>
+                            <h5>Show Kehadiran</h5>
                         </div>
                     </div>
                     <div class="card-body">
@@ -75,11 +75,10 @@
                                     <th>Nis</th>
                                     <th>Mapel</th>
                                     <th>Kelas</th>
-                                    <th>Tugas 1</th>
-                                    <th>Tugas 2</th>
-                                    <th>Tugas 3</th>
-                                    <th>Tugas 4</th>
-                                    <th>Tugas 5</th>
+                                    <th>Sakit</th>
+                                    <th>Ijin</th>
+                                    <th>Alpa</th>
+                                    <th>Dispen</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($nilais as $key => $nilai)
@@ -89,11 +88,10 @@
                                         <td>{{ $nilai->siswas->nis }}</td>
                                         <td>{{ $nilai->mapels->mapel }}</td>
                                         <td>{{ $nilai->kelas->kelas }}</td>
-                                        <td>{{ $nilai->tugas1 }}</td>
-                                        <td>{{ $nilai->tugas2 }}</td>
-                                        <td>{{ $nilai->tugas3 }}</td>
-                                        <td>{{ $nilai->tugas4 }}</td>
-                                        <td>{{ $nilai->tugas5 }}</td>
+                                        <td>{{ $nilai->sakit }}</td>
+                                        <td>{{ $nilai->ijin }}</td>
+                                        <td>{{ $nilai->alpa }}</td>
+                                        <td>{{ $nilai->dispen }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

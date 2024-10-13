@@ -37,10 +37,10 @@
                         @csrf
                         <h1>Login Form</h1>
                         <div>
-                            <input type="email" name="email" value="lexie52@example.org" class="form-control" placeholder="Username" required="" />
+                            <input type="email" name="email" class="form-control" placeholder="Username" required="" />
                         </div>
                         <div>
-                            <input type="password" name="password" value="password" class="form-control" placeholder="Password" required="" />
+                            <input type="password" name="password" class="form-control" placeholder="Password" required="" />
                         </div>
                         <div>
                             <button class="btn btn-default submit">Log in</button>

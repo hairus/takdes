@@ -8,11 +8,11 @@
         <th>Nis</th>
         <th>Mapel</th>
         <th>Rombel</th>
-        <th>tugas1</th>
-        <th>tugas2</th>
-        <th>tugas3</th>
-        <th>tugas4</th>
-        <th>tugas5</th>
+        <th>UH1</th>
+        <th>UH2</th>
+        <th>UH3</th>
+        <th>UH4</th>
+        <th>UH5</th>
     </tr>
     </thead>
     <tbody>
