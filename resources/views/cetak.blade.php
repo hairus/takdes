@@ -414,7 +414,7 @@
             <p>__________________________</p>
         </div>
         <div class="sign">
-            <p>Kraksaan, 26 Maret 2024</p>
+            <p>Kraksaan, 18 Oktober 2024</p>
             <p>Wali Kelas,</p>
             <br><br>
             <p><strong>{{ auth()->user()->name }}</strong><br>
