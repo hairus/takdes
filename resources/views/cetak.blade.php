@@ -185,7 +185,8 @@
                 <th rowspan="2">Mata Pelajaran</th>
                 <th colspan="5">Nilai Tugas</th>
                 <th colspan="5">Nilai Ulangan Harian</th>
-                <th colspan="4">Ketidakhadiran</th>
+                <th colspan="3">Ketidakhadiran</th>
+                <th rowspan="2">Dispen</th>
             </tr>
             <tr>
                 <th>1</th>
@@ -201,7 +202,6 @@
                 <th>Sakit</th>
                 <th>Izin</th>
                 <th>Alpa</th>
-                <th>Dispen</th>
             </tr>
         </thead>
         <tbody>
