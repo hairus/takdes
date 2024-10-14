@@ -10,11 +10,14 @@ use App\Models\guru_tatib;
 use App\Models\kelas;
 use App\Models\mapel_kelas;
 use App\Models\mapels;
+use App\Models\nilai_tatib;
+use App\Models\nilaiEsktras;
 use App\Models\siswas;
 use App\Models\tas;
 use App\Models\User;
 use App\Models\wali;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -41,10 +44,10 @@ class HomeController extends Controller
         return view('gurus', compact('gurus'));
     }
 
-    public function cetak()
-    {
-        return view('cetak');
-    }
+//    public function cetak()
+//    {
+//        return view('cetak');
+//    }
 
     public function guru()
     {
@@ -279,5 +282,47 @@ class HomeController extends Controller
         $gtk = guru_kelas_tatib::find($id)->delete();
 
         return back();
+    }
+
+    public function monitor()
+    {
+        $kelas = kelas::all();
+
+        return view('admin.monitor', compact('kelas'));
+    }
+
+    public function showSiswas($id)
+    {
+        $kelas = kelas::where('id', $id)->first();
+
+        $siswas = siswas::where('rombel', $kelas->kelas)->orderBy('name')->get();
+
+        return view('admin.showSiswa', compact('siswas'));
+    }
+
+    public function cetak($id)
+    {
+        $siswa = siswas::find($id);
+        $kelas_id = kelas::where('kelas', $siswa->rombel)->first()->id;
+        $ta = tas::where('aktif', 1)->first();
+        $wali = wali::where([
+            'guru_id' => Auth::user()->id,
+            "ta_id" => $ta->id
+        ])->first();
+
+        $mapel_kelas = mapel_kelas::with(['mapels' => function ($q) use ($siswa) {
+            $q->with(['tugass' => function ($y) use ($siswa) {
+                $y->where('siswa_id', $siswa->id);
+            }]);
+            $q->with(['uhs' => function ($y) use ($siswa) {
+                $y->where('siswa_id', $siswa->id);
+            }]);
+        }])->where('kelas_id', $kelas_id)->get();
+
+        $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
+
+        $poin = nilai_tatib::where('siswa_id', $siswa->id)->first();
+
+        return view('admin.cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin'));
     }
 }

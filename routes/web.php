@@ -50,6 +50,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('simGuruKelasTatib', [App\Http\Controllers\HomeController::class, 'simGuruKelasTatib']);
     Route::get('delgkt/{id}', [App\Http\Controllers\HomeController::class, 'delgkt']);
 
+    Route::get('monitor', [\App\Http\Controllers\HomeController::class, 'monitor']);
+    Route::get('/admin/showSiswas/{id}', [\App\Http\Controllers\HomeController::class, 'showSiswas']);
+    Route::get('/admin/showNilai/{id}', [\App\Http\Controllers\HomeController::class, 'cetak']);
+
 
 });
 

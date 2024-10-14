@@ -394,7 +394,7 @@
                     @if($poin)
                         {{ $poin->poin }}
                     @else
-                        -
+                    -
                     @endif
                 </td>
             </tr>
