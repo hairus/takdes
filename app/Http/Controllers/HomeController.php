@@ -305,6 +305,7 @@ class HomeController extends Controller
         $siswa = siswas::find($id);
         $kelas_id = kelas::where('kelas', $siswa->rombel)->first()->id;
         $ta = tas::where('aktif', 1)->first();
+
         $wali = wali::where([
             'guru_id' => Auth::user()->id,
             "ta_id" => $ta->id
@@ -317,12 +318,28 @@ class HomeController extends Controller
             $q->with(['uhs' => function ($y) use ($siswa) {
                 $y->where('siswa_id', $siswa->id);
             }]);
-        }])->where('kelas_id', $kelas_id)->get();
+        }])->where('kelas_id', $kelas_id)
+            /* ini jika order sesuai dengan setingan mapels yang di induk */
+//            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
+            ->get();
 
         $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
 
         $poin = nilai_tatib::where('siswa_id', $siswa->id)->first();
 
         return view('admin.cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin'));
+    }
+
+    public function coba()
+    {
+        $mapels = mapel_kelas::where('kelas_id', 1)->with('mapels')
+            ->whereHas('mapels')
+            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
+            ->get();
+
+        foreach ($mapels as $mapel) {
+            echo $mapel->mapels . '<br>';
+        }
+
     }
 }

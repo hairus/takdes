@@ -51,7 +51,9 @@ class WaliController extends Controller
             $q->with(['uhs' => function ($y) use ($siswa) {
                 $y->where('siswa_id', $siswa->id);
             }]);
-        }])->where('kelas_id', $wali->kelas_id)->get();
+        }])->where('kelas_id', $wali->kelas_id)
+            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
+            ->get();
 
         $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
 

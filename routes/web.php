@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('monitor', [\App\Http\Controllers\HomeController::class, 'monitor']);
     Route::get('/admin/showSiswas/{id}', [\App\Http\Controllers\HomeController::class, 'showSiswas']);
     Route::get('/admin/showNilai/{id}', [\App\Http\Controllers\HomeController::class, 'cetak']);
+    Route::get('/admin/coba', [\App\Http\Controllers\HomeController::class, 'coba']);
 
 
 });
