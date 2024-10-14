@@ -20,9 +20,9 @@ class TugasSiswaExport implements FromView
 
     public function view(): View
     {
-        $siswa = siswas::where('rombel', 'X-A')->orderBy('name', 'ASC')->get();
-        $mapel = mapels::where('id', $this->mapel_id)->first();
         $kelas = kelas::where('id', $this->kelas_id)->first();
+        $siswa = siswas::where('rombel', $kelas->kelas)->orderBy('name', 'ASC')->get();
+        $mapel = mapels::where('id', $this->mapel_id)->first();
 
         return view('guru.exportT', [
             'siswas' => $siswa,
