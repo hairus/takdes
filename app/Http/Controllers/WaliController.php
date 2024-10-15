@@ -27,7 +27,8 @@ class WaliController extends Controller
             "ta_id" => $ta->id
         ])->first();
 
-        $kelas = kelas::find($wali->kelas_id)->first();
+        $kelas = kelas::where('id',$wali->kelas_id)->first();
+
 
         $siswas = siswas::where('rombel', $kelas->kelas)->orderBy('name', 'ASC')->get();
 
@@ -36,7 +37,6 @@ class WaliController extends Controller
 
     public function cetak($id)
     {
-
         $siswa = siswas::find($id);
         $ta = tas::where('aktif', 1)->first();
         $wali = wali::where([
