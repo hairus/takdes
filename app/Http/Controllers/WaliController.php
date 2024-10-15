@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\kelas;
 use App\Models\mapel_kelas;
+use App\Models\mapels;
 use App\Models\nilai_tatib;
 use App\Models\nilaiEsktras;
-use App\Models\siswa_ekstra;
 use App\Models\siswas;
 use App\Models\tas;
 use App\Models\wali;

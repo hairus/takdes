@@ -320,7 +320,7 @@ class HomeController extends Controller
             }]);
         }])->where('kelas_id', $kelas_id)
             /* ini jika order sesuai dengan setingan mapels yang di induk */
-//            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
+            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
             ->get();
 
         $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
