@@ -371,7 +371,7 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td style="text-align: left">{{ $value->ekstras->ekstra }}</td>
-                    <td style="text-align: left">{{ $value->predikat }}</td>
+                    <td>{{ $value->predikat }}</td>
                     <td style="text-align: left">{{ $value->keterangan }}</td>
                 </tr>
             @endforeach
