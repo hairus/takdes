@@ -370,9 +370,9 @@
             @foreach ($ekstras as $key => $value)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $value->ekstras->ekstra }}</td>
+                    <td style="text-align: left">{{ $value->ekstras->ekstra }}</td>
                     <td>{{ $value->predikat }}</td>
-                    <td>{{ $value->keterangan }}</td>
+                    <td style="text-align: left">{{ $value->keterangan }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -390,7 +390,7 @@
         <tbody>
             <tr>
                 <td>1</td>
-                <td>
+                <td style="text-align: left">
                     @if($poin)
                         {{ $poin->poin }}
                     @else
