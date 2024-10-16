@@ -73,6 +73,7 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
+                                            <li><a href="{{ url('/tas') }}">Management Tahun Ajaran</a></li>
                                             <li><a href="{{ url('/guru') }}">Management user</a></li>
                                             <li><a href="{{ url('/gurus') }}">Management Guru</a></li>
                                             <li><a href="{{ url('/siswas') }}">Management Siswa</a></li>

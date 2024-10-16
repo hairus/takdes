@@ -131,15 +131,14 @@
 </head>
 
 <body>
-
     <div class="header">
         <table boder="none" style="border:none">
             <tr>
                 <td style="border:none;"><img src="{{ asset('logo-jatim.png') }}" alt="Logo Provinsi Jawa Timur"></td>
                 <td style="border:none;">
-                    <h1>Pemerintah Provinsi Jawa Timur</h1>
-                    <h2>Dinas Pendidikan</h2>
-                    <h2>SMAN 1 Kraksaan</h2>
+                    <h2>Pemerintah Provinsi Jawa Timur</h2>
+                    <h3>Dinas Pendidikan</h3>
+                    <h4>SMAN 1 Kraksaan</h4>
                     <div class="school-info">
                         <p>Jalan Imam Bonjol No. 13 Kraksaan Telp. (0335) 841214</p>
                         <p><span class="bold">Website :</span> <a
@@ -354,7 +353,7 @@
             <!-- Tambahkan mata pelajaran lainnya -->
         </tbody>
     </table>
-
+    <div style="page-break-after: always;"></div>
     <!-- B. Laporan Ekstrakurikuler dan Prestasi -->
     <div class="section-title">B. Laporan Ekstrakurikuler dan Prestasi</div>
     <table>
@@ -377,7 +376,6 @@
             @endforeach
         </tbody>
     </table>
-
     <!-- C. Laporan Pelanggaran Tata Tertib -->
     <div class="section-title">C. Laporan Pelanggaran Tata Tertib</div>
     <table>
@@ -391,10 +389,10 @@
             <tr>
                 <td style="text-align: left">1</td>
                 <td style="text-align: left">
-                    @if($poin)
+                    @if ($poin)
                         {{ $poin->poin }}
                     @else
-                    -
+                        -
                     @endif
                 </td>
             </tr>
@@ -402,25 +400,34 @@
     </table>
     <code style="margin: 0"><i>NB: Untuk Detail Pelanggaran Silakan Menghubungi BK / Tim Tatib Sekolah</i></code>
     <!-- D. Catatan/Tanggapan Orang Tua -->
+
     <div class="section-title">D. Catatan/Tanggapan Orang Tua</div>
     <div class="catatan-orangtua">
         <!-- Ruang untuk catatan/tanggapan orang tua -->
     </div>
 
     <!-- Tanda Tangan -->
-    <div class="footer-signature">
-        <div class="sign">
-            <p>Wali Murid,</p>
-            <br><br>
-            <p>__________________________</p>
-        </div>
-        <div class="sign">
-            <p>Kraksaan, 18 Oktober 2024</p>
-            <p>Wali Kelas,</p>
-            <br><br>
-            <p><strong>{{ auth()->user()->name }}</strong><br>
-                NIP. {{ auth()->user()->nip }}</p>
-        </div>
+    {{-- <div class="footer-signature">
+        <table style="border: none">
+            <tr style="border: none">
+                <td style="border: none">
+                    <div class="sign" style="width: 100%">
+                        <p>Wali Murid,</p>
+                        <br><br>
+                        <p>__________________________</p>
+                    </div>
+                </td>
+                <td style="border: none">
+                    <div class="sign" style="width: 100%">
+                        <p>Kraksaan, 18 Oktober 2024</p>
+                        <p>Wali Kelas,</p>
+                        <br><br>
+                        <p><strong>{{ auth()->user()->name }}</strong><br>
+                            NIP. {{ auth()->user()->nip }}</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="footer" style="text-align: center;">
@@ -429,8 +436,9 @@
         <br><br>
         <p><strong>BAMBANG SUDIARTO, S.Pd., M.M.Pd.</strong><br>
             NIP. 19680418 199102 1 003</p>
-    </div>
+    </div> --}}
 
 </body>
 
 </html>
+<div style="page-break-after: always;"></div>

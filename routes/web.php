@@ -21,6 +21,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // Auth::routes();
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('tas', [\App\Http\Controllers\HomeController::class, 'tas']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/guru', [App\Http\Controllers\HomeController::class, 'guru']);
     Route::get('/gurus', [App\Http\Controllers\HomeController::class, 'gurus']);
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('monitor', [\App\Http\Controllers\HomeController::class, 'monitor']);
     Route::get('/admin/showSiswas/{id}', [\App\Http\Controllers\HomeController::class, 'showSiswas']);
     Route::get('/admin/showNilai/{id}', [\App\Http\Controllers\HomeController::class, 'cetak']);
+    Route::get('/admin/download/{id}', [\App\Http\Controllers\HomeController::class, 'downloadPdf']);
     Route::get('/admin/coba', [\App\Http\Controllers\HomeController::class, 'coba']);
 
 

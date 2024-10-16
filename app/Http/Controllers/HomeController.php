@@ -37,6 +37,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
+     public function tas()
+     {
+        $tas = tas::get();
+
+        return view('tas', compact('tas'));
+     }
+
     public function index()
     {
         $gurus = User::where('role', 'guru')->get();
@@ -44,10 +51,10 @@ class HomeController extends Controller
         return view('gurus', compact('gurus'));
     }
 
-//    public function cetak()
-//    {
-//        return view('cetak');
-//    }
+    //    public function cetak()
+    //    {
+    //        return view('cetak');
+    //    }
 
     public function guru()
     {
@@ -330,6 +337,56 @@ class HomeController extends Controller
         return view('admin.cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin'));
     }
 
+    public function downloadPdf($id)
+    {
+        $siswa = siswas::find($id);
+        $kelas_id = kelas::where('kelas', $siswa->rombel)->first()->id;
+        $ta = tas::where('aktif', 1)->first();
+
+        $wali = wali::where([
+            'guru_id' => Auth::user()->id,
+            "ta_id" => $ta->id
+        ])->first();
+
+        $mapel_kelas = mapel_kelas::with(['mapels' => function ($q) use ($siswa) {
+            $q->with(['tugass' => function ($y) use ($siswa) {
+                $y->where('siswa_id', $siswa->id);
+            }]);
+            $q->with(['uhs' => function ($y) use ($siswa) {
+                $y->where('siswa_id', $siswa->id);
+            }]);
+        }])->where('kelas_id', $kelas_id)
+            /* ini jika order sesuai dengan setingan mapels yang di induk */
+            ->orderBy(mapels::select('id')->whereColumn('mapels.id', 'mapel_kelas.mapel_id'), 'asc')
+            ->get();
+
+        $ekstras = nilaiEsktras::where('siswa_id', $siswa->id)->get();
+
+        $poin = nilai_tatib::where('siswa_id', $siswa->id)->first();
+
+        $mpdf = new \Mpdf\Mpdf();
+
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_top' => 0,
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'mirrorMargins' => true
+        ]);
+
+        $mpdf->SetWatermarkText('ADMIN'); // Will cope with UTF-8 encoded text
+        $mpdf->watermark_font = 'DejaVuSansCondensed'; // Uses default font if left blank
+
+        $mpdf->showWatermarkText = true;
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
+
+        // Write some HTML code:
+        $mpdf->WriteHTML(view('admin.cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin')));
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($siswa->name. ' - '.$ta->semester.'pdf', 'D');
+    }
+
     public function coba()
     {
         $mapels = mapel_kelas::where('kelas_id', 1)->with('mapels')
@@ -340,6 +397,5 @@ class HomeController extends Controller
         foreach ($mapels as $mapel) {
             echo $mapel->mapels . '<br>';
         }
-
     }
 }

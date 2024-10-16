@@ -31,6 +31,11 @@
                                                 <i class="fa fa-print"></i>
                                             </button>
                                         </a>
+                                        <a href="{{ url('admin/download/'.$value->id) }}">
+                                            <button class="btn btn-sm btn-dark">
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
