@@ -148,7 +148,7 @@
                                                 class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{ url('/profile') }}">Profile</a></li>
-                                            <li><a href="{{ url('/penT') }}">Penialan Tugas</a></li>
+                                            <li><a href="{{ url('/penT') }}">Penilaian Tugas</a></li>
                                             <li><a href="{{ url('/penUH') }}">Penilaian UH</a></li>
                                             <li><a href="{{ url('/kehadiran') }}">Input Kehadiran</a></li>
                                         </ul>
