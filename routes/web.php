@@ -22,6 +22,8 @@ Route::post('/login', [LoginController::class, 'login']);
 // Auth::routes();
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('tas', [\App\Http\Controllers\HomeController::class, 'tas']);
+    Route::get('ta/aktif/{id}', [\App\Http\Controllers\HomeController::class, 'aktif']);
+    Route::post('simpanTa', [\App\Http\Controllers\HomeController::class, 'simpanTa']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/guru', [App\Http\Controllers\HomeController::class, 'guru']);
     Route::get('/gurus', [App\Http\Controllers\HomeController::class, 'gurus']);
@@ -29,6 +31,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/kelas', [App\Http\Controllers\HomeController::class, 'kelas']);
     Route::get('/mapels', [App\Http\Controllers\HomeController::class, 'mapels']);
     Route::get('/mapelKelas', [App\Http\Controllers\HomeController::class, 'mapelKelas']);
+    Route::post('/copyMapel', [App\Http\Controllers\HomeController::class, 'copyMapel']);
     Route::post('/simpanGmk', [App\Http\Controllers\HomeController::class, 'simpanGmk']);
     Route::get('/delGmk/{id}', [App\Http\Controllers\HomeController::class, 'delGmk']);
     Route::get('/delMapelKelas/{id}', [App\Http\Controllers\HomeController::class, 'delMapelKelas']);

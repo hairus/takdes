@@ -83,7 +83,7 @@
                                             <li><a href="{{ url('/walis') }}">Management Wali</a></li>
                                             <li><a href="{{ url('/ekstra') }}">Management Ekstra</a></li>
                                             <li><a href="{{ url('/tatibs') }}">Management tatib</a></li>
-                                            <li><a href="{{ url('/cetak') }}">cetak</a></li>
+                                            <li><a href="{{ url('/cetak') }}">Pertolongan Pertama pada kecelakaan (P3K)</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-edit"></i> Monitor <span class="fa fa-chevron-down"></span></a>

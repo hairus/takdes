@@ -14,6 +14,9 @@
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#tesModal">
                             Add
                         </button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#copy">
+                            Clone Mapel
+                        </button>
                         <div class="modal fade" id="tesModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -53,7 +56,46 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="modal fade" id="copy">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- header-->
+                                    <div class="modal-header">
+                                        <p>Cloning Mapel</p>
+                                        <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <!--body-->
+                                    <div class="modal-body">
+                                        <form action="{{ url('/copyMapel') }}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="">Pilih Kelas Utama</label>
+                                                <select name="kelas_id" id="" class="form-control"
+                                                        style="width: 100%" required>
+                                                    @foreach ($kelas as $kls)
+                                                        <option value="{{ $kls->id }}">{{ $kls->kelas }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Pilih Kelas Second</label>
+                                                <select name="kelas" id="" class="form-control" style="width: 100%"
+                                                        required>
+                                                    @foreach ($kelas as $kls)
+                                                        <option value="{{ $kls->id }}">{{ $kls->kelas }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    </div>
+                                    <!--footer-->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                        <button class="btn btn-info" type="submit">Simpan</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table" id="siswas">
                                 <thead>

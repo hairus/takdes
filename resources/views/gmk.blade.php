@@ -70,6 +70,7 @@
                                     <th>Nama</th>
                                     <th>Mapel</th>
                                     <th>kelas</th>
+                                    <th>Semester</th>
                                     <th>ta</th>
                                     <th>#</th>
                                 </thead>
@@ -80,7 +81,8 @@
                                             <td>{{ strtoupper($gmk->gurus->name) }}</td>
                                             <td>{{ $gmk->mapels->mapel }}</td>
                                             <td>{{ $gmk->kelas->kelas }}</td>
-                                            <td>{{ $gmk->ta }}</td>
+                                            <td>{{ $gmk->tas->semester }}</td>
+                                            <td>{{ $gmk->tas->ta }}</td>
                                             <td>
                                                 <a href="{{ url('/delGmk/'.$gmk->id)}}">
                                                     <button class="btn btn-danger btn-sm">Delete</button>

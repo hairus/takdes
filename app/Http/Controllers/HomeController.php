@@ -16,8 +16,10 @@ use App\Models\siswas;
 use App\Models\tas;
 use App\Models\User;
 use App\Models\wali;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mpdf\Mpdf;
 
 class HomeController extends Controller
 {
@@ -34,15 +36,42 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
 
-     public function tas()
-     {
+    public function tas()
+    {
         $tas = tas::get();
 
         return view('tas', compact('tas'));
-     }
+    }
+
+    public function simpanTa(Request $request)
+    {
+        tas::create([
+            "ta" => $request->ta,
+            "semester" => $request->smt,
+            "aktif" => 0
+        ]);
+
+        return back();
+    }
+
+    public function aktif($id)
+    {
+        $ta = tas::get();
+        foreach ($ta as $t) {
+            $ta = tas::find($t->id);
+            $ta->aktif = 0;
+            $ta->save();
+        }
+
+        $ta = tas::where('id', $id)->first();
+        $ta->aktif = 1;
+        $ta->save();
+
+        return back();
+    }
 
     public function index()
     {
@@ -72,6 +101,7 @@ class HomeController extends Controller
 
         return view('gmk', compact('gurus', 'mapels', 'kelas', 'gmks'));
     }
+
 
     public function siswas()
     {
@@ -109,6 +139,26 @@ class HomeController extends Controller
         $mapels = mapels::all();
 
         return view('mapels', compact('mapels'));
+    }
+
+    public function copyMapel(Request $request)
+    {
+        $ta = tas::where('aktif', 1)->first();
+        $mapel_kelas = mapel_kelas::where('kelas_id', $request->kelas_id)->get();
+        foreach ($mapel_kelas as $mk) {
+            if ($mk->kelas_id == $request->kelas) {
+                return back();
+            } else {
+                mapel_kelas::create([
+                    "ta_id" => $ta->id,
+                    "mapel_id" => $mk->mapel_id,
+                    "kelas_id" => $request->kelas
+                ]);
+            }
+
+        }
+
+        return back();
     }
 
     public function delGmk($id)
@@ -364,9 +414,9 @@ class HomeController extends Controller
 
         $poin = nilai_tatib::where('siswa_id', $siswa->id)->first();
 
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
 
-        $mpdf = new \Mpdf\Mpdf([
+        $mpdf = new Mpdf([
             'margin_top' => 0,
             'margin_left' => 0,
             'margin_right' => 0,
@@ -378,13 +428,13 @@ class HomeController extends Controller
 
         $mpdf->showWatermarkText = true;
 
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
 
         // Write some HTML code:
         $mpdf->WriteHTML(view('admin.cetak', compact('siswa', 'ta', 'mapel_kelas', 'ekstras', 'poin')));
 
         // Output a PDF file directly to the browser
-        $mpdf->Output($siswa->name. ' - '.$ta->semester.'pdf', 'D');
+        $mpdf->Output($siswa->name . ' - ' . $ta->semester . 'pdf', 'D');
     }
 
     public function coba()
